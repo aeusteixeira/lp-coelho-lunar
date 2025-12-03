@@ -913,6 +913,11 @@ section:not(:last-child)::after {
         padding: 14px 30px;
         font-size: 1rem;
     }
+    
+    .cta-fixed .btn-lunar {
+        padding: 16px 35px;
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -983,7 +988,7 @@ section:not(:last-child)::after {
         left: 0;
         right: 0;
         border-radius: 0;
-        padding: 15px;
+        padding: 12px 15px;
         text-align: center;
         background: linear-gradient(180deg, rgba(10, 22, 36, 0.95) 0%, var(--azul-profundo) 100%);
         box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
@@ -992,7 +997,11 @@ section:not(:last-child)::after {
     
     .cta-fixed .btn-lunar {
         width: 100%;
+        max-width: 100%;
+        padding: 12px 20px;
+        font-size: 0.95rem;
         border-radius: 12px;
+        font-weight: 600;
     }
 }
 
