@@ -15,13 +15,26 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--azul-profundo);
+    background: linear-gradient(180deg, 
+        var(--azul-profundo) 0%, 
+        #0f1f32 25%, 
+        #0d1a2a 50%, 
+        #0f1f32 75%, 
+        var(--azul-profundo) 100%);
+    background-attachment: fixed;
     color: var(--cinza-lunar);
     overflow-x: hidden;
-    background-image: 
-        radial-gradient(ellipse at 20% 30%, rgba(95, 164, 201, 0.03) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 70%, rgba(125, 160, 184, 0.02) 0%, transparent 50%);
-    background-attachment: fixed;
+}
+
+/* Seções sem imagem de fundo - background contínuo */
+#para-quem,
+#beneficios,
+#pacotes,
+#diferenciais,
+#incluso,
+#portfolio,
+#investimento {
+    background: transparent;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -121,12 +134,48 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 10px 30px rgba(95, 164, 201, 0.4);
 }
 
+/* Botão WhatsApp Verde */
+.btn-whatsapp {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    box-shadow: 
+        0 10px 35px rgba(37, 211, 102, 0.4),
+        0 5px 15px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-whatsapp:hover {
+    background: linear-gradient(135deg, #2be076 0%, #1da870 100%);
+    box-shadow: 
+        0 20px 50px rgba(37, 211, 102, 0.5),
+        0 10px 25px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.cta-fixed .btn-whatsapp {
+    box-shadow: 
+        0 15px 50px rgba(37, 211, 102, 0.7),
+        0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.cta-fixed .btn-whatsapp:hover {
+    box-shadow: 
+        0 20px 60px rgba(37, 211, 102, 0.8),
+        0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
 /* Hero Section */
+/* OPACIDADE DA IMAGEM: Altere os valores rgba() abaixo para controlar a visibilidade
+   - Primeiro valor (0.5): opacidade no topo (menor = mais visível)
+   - Segundo valor (0.7): opacidade na base (menor = mais visível)
+   - Valores variam de 0 (transparente/imagem visível) a 1 (opaco/imagem escondida) */
 .hero-section {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, #0A1624 0%, #0f1f32 100%);
+    background: linear-gradient(to bottom, rgba(10, 22, 36, 0.4) 0%, rgba(10, 22, 36, 0.6) 100%), url('../assets/images/bg/hero-bg.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     position: relative;
     overflow: hidden;
     padding: 80px 0;
@@ -242,16 +291,7 @@ section {
     position: relative;
 }
 
-section:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(125, 160, 184, 0.2), transparent);
-}
+/* Transição suave entre seções - removida linha divisória */
 
 .section-title {
     font-size: 3rem;
@@ -292,7 +332,7 @@ section:not(:last-child)::after {
 
 /* Cards Premium */
 .card-lunar {
-    background: linear-gradient(135deg, rgba(15, 31, 50, 0.8) 0%, rgba(10, 22, 36, 0.6) 100%);
+    background: linear-gradient(135deg, rgba(15, 31, 50, 0.7) 0%, rgba(10, 22, 36, 0.5) 100%);
     border: 1px solid rgba(125, 160, 184, 0.25);
     border-radius: 24px;
     padding: 45px;
@@ -304,6 +344,9 @@ section:not(:last-child)::after {
     box-shadow: 
         0 10px 40px rgba(0, 0, 0, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .card-lunar::before {
@@ -398,6 +441,30 @@ section:not(:last-child)::after {
     color: var(--cinza-lunar);
 }
 
+.card-lunar p:last-child {
+    margin-top: auto;
+}
+
+/* Cards da seção de benefícios com altura uniforme */
+#beneficios .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#beneficios .col-md-6,
+#beneficios .col-12 {
+    display: flex;
+}
+
+#beneficios .card-lunar {
+    min-height: 280px;
+    width: 100%;
+}
+
+#beneficios .col-12 .card-lunar {
+    min-height: auto;
+}
+
 .card-lunar ul {
     list-style: none;
     padding: 0;
@@ -418,8 +485,17 @@ section:not(:last-child)::after {
 }
 
 /* Pacotes */
+#pacotes .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#pacotes .col-lg-4 {
+    display: flex;
+}
+
 .package-card {
-    background: linear-gradient(135deg, rgba(15, 31, 50, 0.9) 0%, rgba(10, 22, 36, 0.95) 100%);
+    background: linear-gradient(135deg, rgba(15, 31, 50, 0.8) 0%, rgba(10, 22, 36, 0.85) 100%);
     border: 2px solid rgba(125, 160, 184, 0.3);
     border-radius: 28px;
     padding: 55px 45px;
@@ -430,6 +506,9 @@ section:not(:last-child)::after {
     box-shadow: 
         0 15px 50px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .package-card:hover {
@@ -440,7 +519,7 @@ section:not(:last-child)::after {
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
         0 0 0 3px rgba(95, 164, 201, 0.4);
     border-color: var(--accent-azul);
-    background: linear-gradient(135deg, rgba(15, 31, 50, 0.95) 0%, rgba(10, 22, 36, 0.98) 100%);
+    background: linear-gradient(135deg, rgba(15, 31, 50, 0.85) 0%, rgba(10, 22, 36, 0.88) 100%);
 }
 
 .package-header {
@@ -488,6 +567,10 @@ section:not(:last-child)::after {
     font-size: 1.3rem;
 }
 
+.package-features {
+    flex-grow: 1;
+}
+
 .package-public {
     background: rgba(95, 164, 201, 0.1);
     border-left: 3px solid var(--accent-azul);
@@ -501,6 +584,15 @@ section:not(:last-child)::after {
 }
 
 /* Diferenciais Grid */
+#diferenciais .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#diferenciais .col-md-4 {
+    display: flex;
+}
+
 .diferencial-item {
     text-align: center;
     padding: 50px 30px;
@@ -508,6 +600,12 @@ section:not(:last-child)::after {
     border-radius: 20px;
     background: rgba(15, 31, 50, 0.3);
     border: 1px solid rgba(125, 160, 184, 0.1);
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .diferencial-item:hover {
@@ -538,6 +636,15 @@ section:not(:last-child)::after {
     color: var(--branco);
     font-weight: 600;
     letter-spacing: -0.3px;
+}
+
+/* Seção Como Funciona */
+/* OPACIDADE DA IMAGEM: Altere os valores rgba() - menor = imagem mais visível */
+#como-funciona {
+    background: linear-gradient(to bottom, rgba(10, 22, 36, 0.6) 0%, rgba(15, 31, 50, 0.75) 100%), url('../assets/images/bg/como-funciona-bg.webp');
+    background-size: cover;
+    background-position: center right;
+    background-attachment: fixed;
 }
 
 /* Processo Steps */
@@ -762,7 +869,9 @@ section:not(:last-child)::after {
 .investimento-box ul {
     list-style: none;
     padding: 0;
-    margin: 30px 0;
+    margin: 30px auto;
+    display: inline-block;
+    text-align: left;
 }
 
 .investimento-box ul li {
@@ -771,6 +880,8 @@ section:not(:last-child)::after {
     margin-bottom: 15px;
     padding-left: 30px;
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .investimento-box ul li::before {
@@ -780,6 +891,15 @@ section:not(:last-child)::after {
     color: var(--accent-azul);
     font-weight: bold;
     font-size: 1.4rem;
+}
+
+/* Seção Sobre (Quem está por trás) */
+/* OPACIDADE DA IMAGEM: Altere os valores rgba() - menor = imagem mais visível */
+#sobre {
+    background: linear-gradient(to bottom, rgba(15, 31, 50, 0.6) 0%, rgba(10, 22, 36, 0.75) 100%), url('../assets/images/bg/producao-bg.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 /* Sobre Section */
