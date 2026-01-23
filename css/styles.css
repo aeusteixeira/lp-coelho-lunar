@@ -896,7 +896,7 @@ section {
 /* Seção Sobre (Quem está por trás) */
 /* OPACIDADE DA IMAGEM: Altere os valores rgba() - menor = imagem mais visível */
 #sobre {
-    background: linear-gradient(to bottom, rgba(15, 31, 50, 0.6) 0%, rgba(10, 22, 36, 0.75) 100%), url('../assets/images/bg/producao-bg.webp');
+    background: linear-gradient(to bottom, rgba(15, 31, 50, 0.5) 0%, rgba(10, 22, 36, 0.75) 100%), url('../assets/images/bg/producao-bg.webp');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1122,6 +1122,464 @@ section {
         font-size: 0.95rem;
         border-radius: 12px;
         font-weight: 600;
+    }
+}
+
+/* ========================================
+   SEÇÃO NETFLIX - PORTFÓLIO E DEPOIMENTOS
+   ======================================== */
+
+/* Carrossel Netflix */
+.netflix-carousel {
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 20px 0 40px;
+    margin: 0 -15px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-azul) transparent;
+}
+
+.netflix-carousel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.netflix-carousel::-webkit-scrollbar-track {
+    background: rgba(125, 160, 184, 0.1);
+    border-radius: 4px;
+}
+
+.netflix-carousel::-webkit-scrollbar-thumb {
+    background: var(--accent-azul);
+    border-radius: 4px;
+}
+
+.netflix-row {
+    display: flex;
+    gap: 20px;
+    padding: 0 15px;
+    width: max-content;
+}
+
+/* Card Netflix */
+.netflix-card {
+    width: 280px;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.netflix-card:hover {
+    transform: scale(1.08);
+    z-index: 10;
+}
+
+.netflix-thumb {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.netflix-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.4s ease;
+}
+
+.netflix-card:hover .netflix-thumb img {
+    transform: scale(1.1);
+    filter: brightness(0.7);
+}
+
+/* Overlay do card */
+.netflix-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(10, 22, 36, 0.9) 0%, rgba(10, 22, 36, 0.3) 50%, transparent 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.netflix-card:hover .netflix-overlay {
+    opacity: 1;
+}
+
+/* Botão Play */
+.play-btn {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.play-btn i {
+    font-size: 2rem;
+    color: var(--azul-profundo);
+    margin-left: 4px;
+}
+
+.netflix-card:hover .play-btn {
+    transform: scale(1);
+}
+
+.play-btn:hover {
+    background: var(--accent-azul);
+}
+
+.play-btn:hover i {
+    color: var(--branco);
+}
+
+/* Informações do card */
+.netflix-info {
+    padding: 15px 5px;
+}
+
+.netflix-info h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--branco);
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.netflix-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent-azul) 0%, var(--azul-lunar-claro) 100%);
+    color: var(--branco);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Modal do Vídeo */
+.video-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.video-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.video-modal-content {
+    width: 100%;
+    max-width: 1000px;
+    position: relative;
+}
+
+.video-modal-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: transparent;
+    border: none;
+    color: var(--branco);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.video-modal-close:hover {
+    color: var(--accent-azul);
+    transform: scale(1.2);
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    background: #000;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-modal-title {
+    text-align: center;
+    color: var(--branco);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Responsividade Netflix */
+@media (max-width: 768px) {
+    .netflix-card {
+        width: 220px;
+    }
+    
+    .netflix-thumb {
+        height: 130px;
+    }
+    
+    .play-btn {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .play-btn i {
+        font-size: 1.5rem;
+    }
+    
+    .video-modal-close {
+        top: -40px;
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .netflix-card {
+        width: 180px;
+    }
+    
+    .netflix-thumb {
+        height: 100px;
+    }
+    
+    .netflix-info h5 {
+        font-size: 0.9rem;
+    }
+    
+    .netflix-tag {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+    }
+}
+
+/* Título de seção Netflix */
+.netflix-section-title {
+    color: var(--branco);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.netflix-section-title i {
+    color: var(--accent-azul);
+}
+
+/* ========================================
+   CARDS DE DEPOIMENTOS WHATSAPP
+   ======================================== */
+
+.whatsapp-depoiments {
+    padding: 20px 0;
+}
+
+.whatsapp-card {
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(15, 31, 50, 0.8) 0%, rgba(10, 22, 36, 0.6) 100%);
+    border: 1px solid rgba(125, 160, 184, 0.25);
+}
+
+.whatsapp-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(37, 211, 102, 0.3);
+    border-color: #25D366;
+}
+
+.whatsapp-thumb {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+}
+
+.whatsapp-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: all 0.4s ease;
+}
+
+.whatsapp-card:hover .whatsapp-thumb img {
+    transform: scale(1.05);
+}
+
+.whatsapp-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(10, 22, 36, 0.95) 0%, rgba(10, 22, 36, 0.3) 40%, transparent 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.whatsapp-card:hover .whatsapp-overlay {
+    opacity: 1;
+}
+
+.zoom-btn {
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+}
+
+.zoom-btn i {
+    font-size: 1.5rem;
+    color: var(--branco);
+}
+
+.whatsapp-card:hover .zoom-btn {
+    transform: scale(1);
+}
+
+.whatsapp-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.whatsapp-info h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--branco);
+    margin-bottom: 5px;
+}
+
+.whatsapp-company {
+    font-size: 0.9rem;
+    color: #25D366;
+    font-weight: 500;
+}
+
+/* Modal de Imagem */
+.image-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.image-modal-content {
+    max-width: 500px;
+    max-height: 90vh;
+    position: relative;
+}
+
+.image-modal-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: transparent;
+    border: none;
+    color: var(--branco);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.image-modal-close:hover {
+    color: #25D366;
+    transform: scale(1.2);
+}
+
+.image-modal-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 15px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+}
+
+.image-modal-title {
+    text-align: center;
+    color: var(--branco);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Responsividade WhatsApp Cards */
+@media (max-width: 768px) {
+    .whatsapp-thumb {
+        height: 300px;
+    }
+    
+    .zoom-btn {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .zoom-btn i {
+        font-size: 1.2rem;
     }
 }
 
