@@ -40,12 +40,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Efeito parallax suave no hero
+// Efeito parallax suave no hero (apenas desktop)
 window.addEventListener('scroll', () => {
+    // Desativar parallax em mobile (telas menores que 992px)
+    if (window.innerWidth < 992) return;
+    
     const scrolled = window.pageYOffset;
     const hero = document.querySelector('.hero-section');
     if (hero && scrolled < window.innerHeight) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
     }
 });
 
