@@ -1041,11 +1041,8 @@ section {
 }
 
 @media (max-width: 768px) {
-    /* Desativar background-attachment: fixed em mobile (causa problemas de zoom) */
-    .hero-section,
-    #como-funciona,
-    #sobre,
-    body {
+    /* Desativar background-attachment: fixed apenas no hero em mobile */
+    .hero-section {
         background-attachment: scroll !important;
     }
     
