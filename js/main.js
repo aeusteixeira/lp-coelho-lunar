@@ -15,7 +15,7 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observar elementos que devem animar
 document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.card-lunar, .package-card, .diferencial-item, .process-step, .netflix-card');
+    const animatedElements = document.querySelectorAll('.card-lunar, .package-card, .diferencial-item, .process-step, .netflix-card, .portfolio-featured, .portfolio-item');
     
     animatedElements.forEach((el, index) => {
         el.style.opacity = '0';
@@ -116,6 +116,63 @@ document.addEventListener('DOMContentLoaded', () => {
             closeVideoModal();
         }
     });
+});
+
+// ========================================
+// PORTFÓLIO - NOSSOS TRABALHOS
+// ========================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    const videoModal = document.getElementById('videoModal');
+    const videoFrame = document.getElementById('videoFrame');
+    const videoTitle = document.getElementById('videoTitle');
+
+    // Clique no vídeo destaque
+    const featured = document.querySelector('.portfolio-featured');
+    if (featured) {
+        featured.addEventListener('click', () => {
+            const videoUrl = featured.getAttribute('data-video');
+            const title = featured.getAttribute('data-title');
+            if (videoUrl && videoModal) {
+                videoFrame.src = videoUrl;
+                videoTitle.textContent = title;
+                videoModal.style.display = 'flex';
+                setTimeout(() => videoModal.classList.add('active'), 10);
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    }
+
+    // Clique nos items do carrossel
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    portfolioItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const videoUrl = item.getAttribute('data-video');
+            const title = item.getAttribute('data-title');
+            if (videoUrl && videoModal) {
+                videoFrame.src = videoUrl;
+                videoTitle.textContent = title;
+                videoModal.style.display = 'flex';
+                setTimeout(() => videoModal.classList.add('active'), 10);
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    // Navegação do carrossel
+    const row = document.querySelector('.portfolio-row');
+    const prevBtn = document.querySelector('.portfolio-nav-prev');
+    const nextBtn = document.querySelector('.portfolio-nav-next');
+
+    if (row && prevBtn && nextBtn) {
+        const scrollAmount = 220;
+        prevBtn.addEventListener('click', () => {
+            row.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+        nextBtn.addEventListener('click', () => {
+            row.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+    }
 });
 
 // ========================================
